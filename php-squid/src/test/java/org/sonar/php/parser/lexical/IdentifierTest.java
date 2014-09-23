@@ -17,24 +17,25 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.php.parser.expression;
+package org.sonar.php.parser.lexical;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.php.parser.RuleTest;
 
-public class ConcatenationExpressionTest extends RuleTest {
+public class IdentifierTest extends RuleTest {
 
   @Before
   public void setUp() {
-    setTestedRule(PHPGrammar.CONCATENATION_EXPR);
+    setTestedRule(PHPGrammar.VAR_IDENTIFIER);
   }
 
   @Test
   public void test() {
-
-    matches("$a");
-    matches("$a . $a");
+    matches("$var");
+    matches("$_var");
+    matches("$var1");
   }
+
 }

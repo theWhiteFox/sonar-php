@@ -25,7 +25,7 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.sslr.LexerlessGrammar.GrammarRuleKey;
+import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.parser.LexerlessGrammar;
 
 @Rule(

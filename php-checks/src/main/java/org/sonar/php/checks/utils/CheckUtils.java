@@ -29,7 +29,7 @@ import com.sonar.sslr.api.Token;
 import org.sonar.php.api.PHPPunctuator;
 import org.sonar.php.api.PHPTokenType;
 import org.sonar.php.parser.PHPGrammar;
-import org.sonar.sslr.LexerlessGrammar.GrammarRuleKey;
+import org.sonar.sslr.grammar.GrammarRuleKey;
 
 import java.util.List;
 

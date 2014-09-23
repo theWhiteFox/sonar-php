@@ -32,7 +32,7 @@ import org.sonar.php.api.PHPTokenType;
 import org.sonar.php.checks.utils.CheckUtils;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.sslr.LexerlessGrammar.GrammarRuleKey;
+import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.Map;

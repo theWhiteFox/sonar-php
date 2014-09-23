@@ -102,7 +102,11 @@ public class PHPAstScanner {
     AstScanner.Builder<LexerlessGrammar> builder = new AstScanner.Builder(context).setBaseParser(parser);
 
     builder.withMetrics(PHPMetric.values());
+
+    /* Comment */
     builder.setCommentAnalyser(new PHPCommentAnalyser());
+
+    /* Files */
     builder.setFilesMetric(PHPMetric.FILES);
 
     /* Classes */

@@ -21,6 +21,7 @@ package org.sonar.php;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.impl.ast.AstXmlPrinter;
 import org.sonar.sslr.parser.LexerlessGrammar;
 import org.junit.Test;
 import org.sonar.php.api.PHPMetric;
