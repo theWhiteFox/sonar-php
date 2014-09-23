@@ -22,7 +22,6 @@ package org.sonar.php.checks;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import org.apache.commons.lang.StringUtils;
@@ -33,7 +32,8 @@ import org.sonar.php.api.PHPTokenType;
 import org.sonar.php.checks.utils.CheckUtils;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.sslr.grammar.GrammarRuleKey;
+import org.sonar.sslr.LexerlessGrammar.GrammarRuleKey;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ import java.util.Map;
   key = "S1172",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class UnusedFunctionParametersCheck extends SquidCheck<Grammar> {
+public class UnusedFunctionParametersCheck extends SquidCheck<LexerlessGrammar> {
 
   private static final GrammarRuleKey[] FUNCTION_DECLARATIONS = {
     PHPGrammar.METHOD_DECLARATION,

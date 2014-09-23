@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import org.apache.commons.lang.StringUtils;
@@ -35,6 +34,7 @@ import org.sonar.php.api.PHPPunctuator;
 import org.sonar.php.lexer.PHPLexer;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -42,7 +42,7 @@ import java.util.Set;
 @Rule(
   key = "S1200",
   priority = Priority.MAJOR)
-public class ClassCouplingCheck extends SquidCheck<Grammar> {
+public class ClassCouplingCheck extends SquidCheck<LexerlessGrammar> {
 
   public static final int DEFAULT = 20;
   private Set<String> types = Sets.newHashSet();

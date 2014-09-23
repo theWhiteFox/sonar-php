@@ -23,9 +23,11 @@ import com.google.common.collect.Lists;
 import com.sonar.sslr.api.GenericTokenType;
 import org.sonar.php.api.PHPKeyword;
 import org.sonar.php.api.PHPPunctuator;
+import org.sonar.php.lexer.PHPLexer;
 import org.sonar.php.lexer.PHPTagsChannel;
 import org.sonar.sslr.grammar.GrammarRuleKey;
-import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
+import org.sonar.sslr.grammar.LexerlessGrammarBuilder;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.List;
 
@@ -335,12 +337,17 @@ public enum PHPGrammar implements GrammarRuleKey {
   EXPRESSION,
   KEYWORDS;
 
-  public static LexerfulGrammarBuilder create() {
-    LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
+  public static LexerlessGrammar createGrammar() {
+    return createGrammarBuilder().build();
+  }
+
+  private static LexerlessGrammarBuilder createGrammarBuilder() {
+    LexerlessGrammarBuilder b = LexerlessGrammarBuilder.create();
 
     b.rule(COMPILATION_UNIT).is(b.optional(SCRIPT), GenericTokenType.EOF);
     b.rule(SCRIPT).is(PHPTagsChannel.FILE_OPENING_TAG, b.optional(TOP_STATEMENT_LIST));
 
+    lexical(b);
     keywords(b);
     declaration(b);
     statement(b);
@@ -351,7 +358,7 @@ public enum PHPGrammar implements GrammarRuleKey {
     return b;
   }
 
-  public static void expression(LexerfulGrammarBuilder b) {
+  public static void expression(LexerlessGrammarBuilder b) {
     b.rule(PARENTHESIS_EXPRESSION).is(LPARENTHESIS, b.firstOf(YIELD_EXPRESSION, EXPRESSION), RPARENTHESIS);
 
     b.rule(YIELD_EXPRESSION).is(YIELD, EXPRESSION, b.optional(DOUBLEARROW, EXPRESSION));
@@ -440,15 +447,15 @@ public enum PHPGrammar implements GrammarRuleKey {
     b.rule(CAST_TYPE).is(LPARENTHESIS, b.firstOf("INTEGER", "INT", "DOUBLE", "FLOAT", "STRING", ARRAY, "OBJECT", "BOOLEAN", "BOOL", "BINARY", UNSET), RPARENTHESIS);
 
     b.rule(POSTFIX_EXPR).is(b.firstOf( // TODO martin: to complete
-      //YIELD, TODO martin: check
-      COMBINED_SCALAR_OFFSET,
-      FUNCTION_EXPRESSION,
-      COMMON_SCALAR,
+        //YIELD, TODO martin: check
+        COMBINED_SCALAR_OFFSET,
+        FUNCTION_EXPRESSION,
+        COMMON_SCALAR,
         MEMBER_EXPRESSION,
-      NEW_EXPR,
-      EXIT_EXPR,
-      LIST_ASSIGNMENT_EXPR,
-      INTERNAL_FUNCTION),
+        NEW_EXPR,
+        EXIT_EXPR,
+        LIST_ASSIGNMENT_EXPR,
+        INTERNAL_FUNCTION),
       b.optional(b.firstOf(
         INC,
         DEC,
@@ -522,7 +529,7 @@ public enum PHPGrammar implements GrammarRuleKey {
     b.rule(EXPRESSION).is(ASSIGNMENT_EXPR);
   }
 
-  public static void declaration(LexerfulGrammarBuilder b) {
+  public static void declaration(LexerlessGrammarBuilder b) {
     b.rule(USE_CONST_DECLARATION_STATEMENT).is(USE, CONST, USE_FUNCTION_DECLARATIONS, EOS);
     b.rule(USE_FUNCTION_DECLARATION_STATEMENT).is(USE, FUNCTION, USE_FUNCTION_DECLARATIONS, EOS); // TODO martin: to check
     b.rule(USE_FUNCTION_DECLARATIONS).is(USE_FUNCTION_DECLARATION, b.zeroOrMore(COMMA, USE_FUNCTION_DECLARATION));
@@ -580,7 +587,7 @@ public enum PHPGrammar implements GrammarRuleKey {
       FINAL));
   }
 
-  public static void statement(LexerfulGrammarBuilder b) {
+  public static void statement(LexerlessGrammarBuilder b) {
     b.rule(TOP_STATEMENT_LIST).is(b.oneOrMore(TOP_STATEMENT));
 
     b.rule(TOP_STATEMENT).is(b.firstOf(
@@ -751,7 +758,7 @@ public enum PHPGrammar implements GrammarRuleKey {
       STATEMENT)));
   }
 
-  public static void keywords(LexerfulGrammarBuilder b) {
+  public static void keywords(LexerlessGrammarBuilder b) {
     List<PHPKeyword> keywords = Lists.newArrayList(PHPKeyword.values());
     Object[] rest = new Object[keywords.size() - 2];
     for (int i = 2; i < keywords.size(); i++) {

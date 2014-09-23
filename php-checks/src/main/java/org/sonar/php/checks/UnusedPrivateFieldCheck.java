@@ -21,7 +21,6 @@ package org.sonar.php.checks;
 
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.check.BelongsToProfile;
@@ -31,6 +30,7 @@ import org.sonar.php.api.PHPKeyword;
 import org.sonar.php.api.PHPTokenType;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.Map;
 
@@ -38,7 +38,7 @@ import java.util.Map;
   key = "S1068",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class UnusedPrivateFieldCheck extends SquidCheck<Grammar> {
+public class UnusedPrivateFieldCheck extends SquidCheck<LexerlessGrammar> {
 
   private Map<String, PrivateField> privateFields = Maps.newHashMap();
 

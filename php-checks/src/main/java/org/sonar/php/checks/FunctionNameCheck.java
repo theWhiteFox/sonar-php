@@ -21,19 +21,19 @@ package org.sonar.php.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.regex.Pattern;
 
 @Rule(
   key = "S100",
   priority = Priority.MAJOR)
-public class FunctionNameCheck extends SquidCheck<Grammar> {
+public class FunctionNameCheck extends SquidCheck<LexerlessGrammar> {
 
   public static final String DEFAULT = "^[a-z][a-zA-Z0-9]*$";
   private Pattern pattern = null;

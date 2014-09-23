@@ -22,19 +22,19 @@ package org.sonar.php.checks;
 import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.php.api.PHPKeyword;
 import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.sslr.parser.LexerlessGrammar;
 
 import java.util.Set;
 
 @Rule(
   key = "S1784",
   priority = Priority.MINOR)
-public class MissingMethodVisibilityCheck extends SquidCheck<Grammar> {
+public class MissingMethodVisibilityCheck extends SquidCheck<LexerlessGrammar> {
 
   private static final Set<PHPKeyword> VISIBILITIES = ImmutableSet.of(
     PHPKeyword.PRIVATE,

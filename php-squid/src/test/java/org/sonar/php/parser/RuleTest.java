@@ -20,7 +20,6 @@
 package org.sonar.php.parser;
 
 import com.google.common.base.Charsets;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Rule;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.matcher.GrammarFunctions;
@@ -28,11 +27,12 @@ import com.sonar.sslr.impl.matcher.RuleDefinition;
 import org.sonar.php.PHPConfiguration;
 import org.sonar.php.lexer.PHPTagsChannel;
 import org.sonar.sslr.grammar.GrammarRuleKey;
+import org.sonar.sslr.parser.LexerlessGrammar;
 import org.sonar.sslr.tests.Assertions;
 
 public class RuleTest {
 
-  protected Parser<Grammar> p = PHPParser.create(new PHPConfiguration(Charsets.UTF_8));
+  protected Parser<LexerlessGrammar> p = PHPParser.create(new PHPConfiguration(Charsets.UTF_8));
 
   protected void setRootRule(GrammarRuleKey ruleKey) {
     Rule rule = p.getGrammar().rule(ruleKey);

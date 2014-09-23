@@ -29,7 +29,7 @@ import com.sonar.sslr.api.Token;
 import org.sonar.php.api.PHPPunctuator;
 import org.sonar.php.api.PHPTokenType;
 import org.sonar.php.parser.PHPGrammar;
-import org.sonar.sslr.grammar.GrammarRuleKey;
+import org.sonar.sslr.LexerlessGrammar.GrammarRuleKey;
 
 import java.util.List;
 
@@ -87,7 +87,7 @@ public class CheckUtils {
   }
 
   /**
-   * Returns an array of GrammarRuleKey containing function grammar rule:
+   * Returns an array of GrammarRuleKey containing function LexerlessGrammar rule:
    * METHOD_DECLARATION, FUNCTION_DECLARATION, FUNCTION_EXPRESSION.
    */
   public static GrammarRuleKey[] functions() {
