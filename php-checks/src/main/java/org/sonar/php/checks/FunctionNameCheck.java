@@ -54,7 +54,7 @@ public class FunctionNameCheck extends SquidCheck<LexerlessGrammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    String functionName = astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String functionName = astNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
 
     if (!pattern.matcher(functionName).matches() && !isExcluded(functionName)) {
       getContext().createLineViolation(this, "Rename function \"{0}\" to match the regular expression {1}.", astNode, functionName, format);

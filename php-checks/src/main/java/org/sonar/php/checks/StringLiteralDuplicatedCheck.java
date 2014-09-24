@@ -26,7 +26,7 @@ import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.php.api.PHPTokenType;
+import org.sonar.php.parser.PHPGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.parser.LexerlessGrammar;
 
@@ -52,7 +52,7 @@ public class StringLiteralDuplicatedCheck extends SquidCheck<LexerlessGrammar> {
 
   @Override
   public void init() {
-    subscribeTo(PHPTokenType.STRING_LITERAL);
+    subscribeTo(PHPGrammar.STRING_LITERAL);
   }
 
   @Override

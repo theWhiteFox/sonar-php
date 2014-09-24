@@ -54,7 +54,7 @@ public class ClassNameCheck extends SquidCheck<LexerlessGrammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    String className = astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String className = astNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
 
     if (!pattern.matcher(className).matches()) {
       getContext().createLineViolation(this, "Rename class \"{0}\" to match the regular expression {1}.", astNode, className, format);

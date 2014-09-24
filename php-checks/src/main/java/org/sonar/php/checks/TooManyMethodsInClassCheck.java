@@ -55,7 +55,7 @@ public class TooManyMethodsInClassCheck extends SquidCheck<LexerlessGrammar> {
 
     if (nbMethod > maximumMethodThreshold) {
       getContext().createLineViolation(this, "Class \"{0}\" has {1} methods, which is greater than {2} authorized. Split it into smaller classes.",
-        astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue(), nbMethod, maximumMethodThreshold);
+        astNode, astNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue(), nbMethod, maximumMethodThreshold);
     }
   }
 

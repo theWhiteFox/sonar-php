@@ -93,7 +93,7 @@ public class CallParentConstructorCheck extends SquidCheck<LexerlessGrammar> {
   }
 
   private boolean isNonDeprecatedConstructor(AstNode astNode) {
-    return "__construct".equals(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+    return "__construct".equals(astNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue());
   }
 
   private String getExtendsFrom(AstNode classDec) {

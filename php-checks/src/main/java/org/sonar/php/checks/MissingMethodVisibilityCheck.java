@@ -65,7 +65,7 @@ public class MissingMethodVisibilityCheck extends SquidCheck<LexerlessGrammar> {
 
   private String getMessageForMethodName(AstNode methodNode) {
     StringBuilder builder = new StringBuilder();
-    String name = methodNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String name = methodNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
 
     if (isConstructor(methodNode, name)) {
       builder.append("constructor ");
@@ -85,7 +85,7 @@ public class MissingMethodVisibilityCheck extends SquidCheck<LexerlessGrammar> {
     boolean isConstructorBeforePHP5_3_3 = false;
 
     if (grandParent.is(PHPGrammar.CLASS_DECLARATION)) {
-      isConstructorBeforePHP5_3_3 = methodName.equals(grandParent.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+      isConstructorBeforePHP5_3_3 = methodName.equals(grandParent.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue());
     }
 
     return isConstructorBeforePHP5_3_3 || "__construct".equals(methodName);

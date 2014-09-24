@@ -82,9 +82,9 @@ public class ArgumentWithDefaultValueNotLastCheck extends SquidCheck<LexerlessGr
     for (int i = 0; i < params.size(); i++) {
 
       if (i == (params.size() - 1)) {
-        build.append("\"" + params.get(i).getFirstChild(PHPTokenType.VAR_IDENTIFIER).getTokenOriginalValue() + "\"");
+        build.append("\"" + params.get(i).getFirstChild(PHPGrammar.VAR_IDENTIFIER).getTokenOriginalValue() + "\"");
       } else {
-        build.append("\"" + params.get(i).getFirstChild(PHPTokenType.VAR_IDENTIFIER).getTokenOriginalValue() + "\", ");
+        build.append("\"" + params.get(i).getFirstChild(PHPGrammar.VAR_IDENTIFIER).getTokenOriginalValue() + "\", ");
       }
     }
 

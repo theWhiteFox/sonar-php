@@ -81,7 +81,7 @@ public class UnusedPrivateFieldCheck extends SquidCheck<LexerlessGrammar> {
 
       if (stmtChild.is(PHPGrammar.CLASS_VARIABLE_DECLARATION) && isPrivate(stmtChild)) {
         for (AstNode varDeclaration : stmtChild.getChildren(PHPGrammar.VARIABLE_DECLARATION)) {
-          AstNode varIdentifier = varDeclaration.getFirstChild(PHPTokenType.VAR_IDENTIFIER);
+          AstNode varIdentifier = varDeclaration.getFirstChild(PHPGrammar.VAR_IDENTIFIER);
           privateFields.put(getCalledName(varIdentifier, stmtChild.getFirstChild(PHPGrammar.VARIABLE_MODIFIERS)),
             new PrivateField(varIdentifier));
         }

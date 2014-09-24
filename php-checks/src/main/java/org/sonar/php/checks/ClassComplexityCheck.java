@@ -56,7 +56,7 @@ public class ClassComplexityCheck extends SquidCheck<LexerlessGrammar> {
     if (complexity > max) {
       getContext().createLineViolation(this,
         "The Cyclomatic Complexity of this class \"{0}\" is {1} which is greater than {2} authorized, split this class.",
-        node, node.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue(), complexity, max);
+        node, node.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue(), complexity, max);
     }
   }
 

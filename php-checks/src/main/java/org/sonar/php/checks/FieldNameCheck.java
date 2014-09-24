@@ -54,7 +54,7 @@ public class FieldNameCheck extends SquidCheck<LexerlessGrammar> {
   @Override
   public void visitNode(AstNode astNode) {
     for (AstNode varDec : astNode.getChildren(PHPGrammar.VARIABLE_DECLARATION)) {
-      String fieldName = varDec.getFirstChild(PHPTokenType.VAR_IDENTIFIER).getTokenOriginalValue();
+      String fieldName = varDec.getFirstChild(PHPGrammar.VAR_IDENTIFIER).getTokenOriginalValue();
 
       if (!pattern.matcher(StringUtils.remove(fieldName, "$")).matches()) {
         getContext().createLineViolation(this, "Rename this field \"{0}\" to match the regular expression {1}.", astNode, fieldName, format);

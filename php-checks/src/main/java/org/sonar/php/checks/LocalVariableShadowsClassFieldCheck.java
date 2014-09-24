@@ -60,7 +60,7 @@ public class LocalVariableShadowsClassFieldCheck extends SquidCheck<LexerlessGra
     }
 
     public void setClassName(AstNode classDeclaration) {
-      className = classDeclaration.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+      className = classDeclaration.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
     }
 
     public boolean isInClass() {
@@ -137,7 +137,7 @@ public class LocalVariableShadowsClassFieldCheck extends SquidCheck<LexerlessGra
   }
 
   private boolean isExcluded(AstNode methodDec) {
-    String methodName = methodDec.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String methodName = methodDec.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
     return isStatic(methodDec) || isConstructor(methodDec, methodName) || isSetter(methodDec, methodName);
   }
 
@@ -189,7 +189,7 @@ public class LocalVariableShadowsClassFieldCheck extends SquidCheck<LexerlessGra
 
       if (stmt.is(PHPGrammar.CLASS_VARIABLE_DECLARATION)) {
         for (AstNode varDeclaration : stmt.getChildren(PHPGrammar.VARIABLE_DECLARATION)) {
-          classState.declareField(varDeclaration.getFirstChild(PHPTokenType.VAR_IDENTIFIER));
+          classState.declareField(varDeclaration.getFirstChild(PHPGrammar.VAR_IDENTIFIER));
         }
       }
     }

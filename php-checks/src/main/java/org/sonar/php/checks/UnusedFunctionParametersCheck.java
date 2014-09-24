@@ -60,7 +60,7 @@ public class UnusedFunctionParametersCheck extends SquidCheck<LexerlessGrammar> 
     }
 
     private void declare(AstNode astNode) {
-      Preconditions.checkState(astNode.is(PHPTokenType.VAR_IDENTIFIER));
+      Preconditions.checkState(astNode.is(PHPGrammar.VAR_IDENTIFIER));
 
       String identifier = astNode.getTokenValue();
       arguments.put(identifier, 0);
@@ -87,7 +87,7 @@ public class UnusedFunctionParametersCheck extends SquidCheck<LexerlessGrammar> 
   @Override
   public void init() {
     subscribeTo(FUNCTION_DECLARATIONS);
-    subscribeTo(PHPGrammar.PARAMETER_LIST, PHPTokenType.VAR_IDENTIFIER);
+    subscribeTo(PHPGrammar.PARAMETER_LIST, PHPGrammar.VAR_IDENTIFIER);
   }
 
   @Override
@@ -103,12 +103,12 @@ public class UnusedFunctionParametersCheck extends SquidCheck<LexerlessGrammar> 
   }
 
   private boolean isVarIdentifierInsideFunction(AstNode node) {
-    return currentScope != null && node.getParent().isNot(PHPGrammar.PARAMETER) && node.is(PHPTokenType.VAR_IDENTIFIER);
+    return currentScope != null && node.getParent().isNot(PHPGrammar.PARAMETER) && node.is(PHPGrammar.VAR_IDENTIFIER);
   }
 
   private void initParametersList(AstNode parameterListNode) {
     for (AstNode parameterNode : parameterListNode.getChildren(PHPGrammar.PARAMETER)) {
-      currentScope.declare(parameterNode.getFirstChild(PHPTokenType.VAR_IDENTIFIER));
+      currentScope.declare(parameterNode.getFirstChild(PHPGrammar.VAR_IDENTIFIER));
     }
   }
 

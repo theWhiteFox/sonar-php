@@ -54,7 +54,7 @@ public class DeprecatedPredefinedVariablesUseCheck extends SquidCheck<LexerlessG
 
   private static boolean isSimpleVariable(AstNode compoundNode) {
     AstNode compoundChild = compoundNode.getFirstChild();
-    if (compoundChild.isNot(PHPTokenType.VAR_IDENTIFIER)) {
+    if (compoundChild.isNot(PHPGrammar.VAR_IDENTIFIER)) {
       return false;
     }
 

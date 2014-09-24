@@ -386,8 +386,8 @@ public enum PHPGrammar implements GrammarRuleKey {
     b.rule(IDENTIFIER).is(SPACING, b.nextNot(KEYWORDS), b.regexp(PHPLexer.IDENTIFIER));
 
     // Tags & Inline HTML
-    b.rule(FILE_OPENING_TAG).is(SPACING, b.token(PHPTagsChannel.FILE_OPENING_TAG, b.regexp(PHPTagsChannel.START)));
-    b.rule(INLINE_HTML).is(SPACING, b.token(PHPTagsChannel.INLINE_HTML, b.regexp(PHPTagsChannel.END)));
+    b.rule(FILE_OPENING_TAG).is(SPACING, b.token(PHPTagsChannel.FILE_OPENING_TAG, b.regexp(PHPTagsChannel.START))).skip();
+    b.rule(INLINE_HTML).is(SPACING, b.token(PHPTagsChannel.INLINE_HTML, b.regexp(PHPTagsChannel.END))).skip();
 
     b.rule(EOF).is(b.token(GenericTokenType.EOF, b.endOfInput())).skip();
   }
@@ -799,9 +799,9 @@ public enum PHPGrammar implements GrammarRuleKey {
       PHPKeyword tokenType = PHPKeyword.values()[i];
 
       // PHP keywords are case insensitive
-      b.rule(tokenType).is(SPACING, b.regexp("(?i)" + tokenType.getValue()), b.nextNot(b.regexp(PHPLexer.IDENTIFIER_PART)));
+      b.rule(tokenType).is(SPACING, b.token(tokenType, b.regexp("(?i)" + tokenType.getValue())), b.nextNot(b.regexp(PHPLexer.IDENTIFIER_PART))).skip();
       if (i > 1) {
-        rest[i - 2] = tokenType.getValue();
+        rest[i - 2] = b.regexp("(?i)" + tokenType.getValue());
       }
     }
 
@@ -815,11 +815,11 @@ public enum PHPGrammar implements GrammarRuleKey {
 
   private static void punctuators(LexerlessGrammarBuilder b) {
     for (PHPPunctuator p : PHPPunctuator.values()) {
-      b.rule(p).is(SPACING, p.getValue());
+      b.rule(p).is(SPACING, b.token(p, p.getValue())).skip();
     }
   }
 
   private static Object word(LexerlessGrammarBuilder b, String word) {
-    return b.sequence(SPACING, b.regexp("(?i)" + word), b.nextNot(PHPLexer.IDENTIFIER_PART));
+    return b.sequence(SPACING, b.regexp("(?i)" + word), b.nextNot(b.regexp(PHPLexer.IDENTIFIER_PART)));
   }
 }

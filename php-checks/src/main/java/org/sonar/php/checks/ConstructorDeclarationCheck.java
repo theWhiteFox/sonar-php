@@ -49,7 +49,7 @@ public class ConstructorDeclarationCheck extends SquidCheck<LexerlessGrammar> {
   }
 
   private static AstNode getDeprecatedConstructor(AstNode astNode) {
-    String className = astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String className = astNode.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
 
     for (AstNode classStmt : astNode.getChildren(PHPGrammar.CLASS_STATEMENT)) {
       AstNode stmt = classStmt.getFirstChild();
@@ -62,6 +62,6 @@ public class ConstructorDeclarationCheck extends SquidCheck<LexerlessGrammar> {
   }
 
   private static String getMethodName(AstNode method) {
-    return method.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    return method.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue();
   }
 }

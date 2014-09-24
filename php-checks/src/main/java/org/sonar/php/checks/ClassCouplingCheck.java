@@ -164,7 +164,7 @@ public class ClassCouplingCheck extends SquidCheck<LexerlessGrammar> {
 
     if (classNameNode.is(PHPKeyword.NAMESPACE)) {
       return getClassName(variable);
-    } else if (classNameNode.is(PHPGrammar.CLASS_NAME, GenericTokenType.IDENTIFIER) && classNameNode.getFirstChild().isNot(PHPKeyword.STATIC)) {
+    } else if (classNameNode.is(PHPGrammar.CLASS_NAME, PHPGrammar.IDENTIFIER) && classNameNode.getFirstChild().isNot(PHPKeyword.STATIC)) {
       return getClassName(classNameNode);
     } else {
       return null;

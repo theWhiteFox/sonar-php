@@ -62,7 +62,7 @@ public class ConstantNameCheck extends SquidCheck<LexerlessGrammar> {
       checkConstantName(astNode, getFirstParameter(astNode));
     } else if (astNode.is(PHPGrammar.CLASS_CONSTANT_DECLARATION, PHPGrammar.CONSTANT_DECLARATION)) {
       for (AstNode constDec : astNode.getChildren(PHPGrammar.MEMBER_CONST_DECLARATION, PHPGrammar.CONSTANT_VAR)) {
-        checkConstantName(constDec, constDec.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+        checkConstantName(constDec, constDec.getFirstChild(PHPGrammar.IDENTIFIER).getTokenOriginalValue());
       }
     }
   }
