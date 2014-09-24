@@ -64,7 +64,7 @@ public class LocalVariableScope {
     Preconditions.checkArgument(globalVarStmt.is(PHPGrammar.GLOBAL_STATEMENT));
 
     for (AstNode globalVar : globalVarStmt.getFirstChild(PHPGrammar.GLOBAL_VAR_LIST).getChildren(PHPGrammar.GLOBAL_VAR)) {
-      AstNode var = globalVar.getFirstChild();
+      AstNode var = globalVar.getFirstChild(PHPGrammar.COMPOUND_VARIABLE).getFirstChild();
 
       if (var.is(PHPGrammar.VAR_IDENTIFIER)) {
         declareExclusion(var.getTokenOriginalValue());

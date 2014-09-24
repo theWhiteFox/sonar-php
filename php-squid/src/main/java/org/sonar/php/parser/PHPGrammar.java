@@ -753,9 +753,7 @@ public enum PHPGrammar implements GrammarRuleKey {
 
     b.rule(GLOBAL_STATEMENT).is(GLOBAL, GLOBAL_VAR_LIST, EOS);
     b.rule(GLOBAL_VAR_LIST).is(GLOBAL_VAR, b.zeroOrMore(COMMA, GLOBAL_VAR));
-    b.rule(GLOBAL_VAR).is(b.firstOf(
-      b.sequence(DOLAR, EXPRESSION),
-      VAR_IDENTIFIER));
+    b.rule(GLOBAL_VAR).is(b.optional(SIMPLE_INDIRECT_REFERENCE), COMPOUND_VARIABLE);
 
     b.rule(STATIC_STATEMENT).is(STATIC, STATIC_VAR_LIST, EOS);
     b.rule(STATIC_VAR_LIST).is(STATIC_VAR, b.zeroOrMore(COMMA, STATIC_VAR));
